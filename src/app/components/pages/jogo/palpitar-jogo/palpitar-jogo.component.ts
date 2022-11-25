@@ -16,6 +16,8 @@ export class PalpitarJogoComponent implements OnInit {
   gols_1!: number;
   gols_2!: number;
   id! : number;
+  selecao1_id! : number;
+  selecao2_id! : number;
  
   
   constructor(
@@ -33,6 +35,8 @@ export class PalpitarJogoComponent implements OnInit {
           this.http.get<Jogo>(`https://localhost:5001/api/jogo/buscar/${id}`).subscribe({
             next: (jogo) => {
               this.id = id;
+              this.selecao1_id = jogo.selecaoAId;
+              this.selecao2_id = jogo.selecaoBId;
           },
         });
         }
@@ -42,14 +46,14 @@ export class PalpitarJogoComponent implements OnInit {
 
   palpitar(): void {
     let jogo: Jogo = {
-     "id": this.id,
+      "id": this.id,
+      "selecaoAId": this.selecao1_id,
+      "selecaoBId": this.selecao2_id,
       "selecaoA_gols" : this.gols_1.toString(),
-      "selecaoB_gols" : this.gols_2.toString(),
-
-     
+      "selecaoB_gols" : this.gols_2.toString()
     };
 
-    this.http.patch<Jogo>("https://localhost:5001/api/jogo/palpitar", jogo).subscribe({
+    this.http.post<Jogo>("https://localhost:5001/api/jogo/palpitar", jogo).subscribe({
       next: (funcionario) => {
         this._snackBar.open("Palpite cadastrado", "Ok!", {
           horizontalPosition: "right",

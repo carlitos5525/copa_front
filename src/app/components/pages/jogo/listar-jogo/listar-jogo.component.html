@@ -17,9 +17,9 @@
       <tr *ngFor="let jogo of jogos">
         <td>{{jogo.id}}</td>
         <td>{{jogo.selecaoA?.nome}}</td>
-        <td></td>
+        <td>{{jogo.selecaoA_gols}}</td>
         <td>X</td>
-        <td></td>
+        <td>{{jogo.selecaoB_gols}}</td>
         <td>{{jogo.selecaoB?.nome}}</td>
         <td>
           <a type="button" mat-raised-button
