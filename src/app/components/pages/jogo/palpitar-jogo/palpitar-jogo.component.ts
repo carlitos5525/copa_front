@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { Jogo } from "src/app/models/jogo.model";
+import { Selecao } from "src/app/models/selecao.model";
 
 @Component({
   selector: "app-palpitar-jogo",
@@ -10,11 +11,12 @@ import { Jogo } from "src/app/models/jogo.model";
   styleUrls: ["./palpitar-jogo.component.css"],
 })
 export class PalpitarJogoComponent implements OnInit {
-  selecao1! : string;
-  selecao2! : string;
+  selecao1_nome : string = "teste";
+  selecao2_nome : string = "teste";
   gols_1!: number;
   gols_2!: number;
   id! : number;
+ 
   
   constructor(
     private http: HttpClient,
@@ -31,11 +33,29 @@ export class PalpitarJogoComponent implements OnInit {
           this.http.get<Jogo>(`https://localhost:5001/api/jogo/buscar/${id}`).subscribe({
             next: (jogo) => {
               this.id = id;
-              this.selecao1 = jogo.selecaoA?.nome;
-              this.selecao2 = jogo.selecaoB?.nome;
-            },
-          });
+          },
+        });
         }
+      },
+    });
+  }
+
+  palpitar(): void {
+    let jogo: Jogo = {
+     "id": this.id,
+      "selecaoA_gols" : this.gols_1.toString(),
+      "selecaoB_gols" : this.gols_2.toString(),
+
+     
+    };
+
+    this.http.patch<Jogo>("https://localhost:5001/api/jogo/palpitar", jogo).subscribe({
+      next: (funcionario) => {
+        this._snackBar.open("Palpite cadastrado", "Ok!", {
+          horizontalPosition: "right",
+          verticalPosition: "top",
+        });
+        this.router.navigate(["pages/jogo/listar"]);
       },
     });
   }

@@ -34,7 +34,8 @@ export class CadastrarJogoComponent implements OnInit {
   cadastrar() : void {
     let jogo : Jogo = {
       "selecaoAId": this.selecao1_id,
-      "selecaoBId": this.selecao2_id
+      "selecaoBId": this.selecao2_id,
+     
     }
 
     this.http.post<Jogo>("https://localhost:5001/api/jogo/cadastrar", jogo).subscribe({
