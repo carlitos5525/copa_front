@@ -11,8 +11,8 @@ import { Selecao } from "src/app/models/selecao.model";
   styleUrls: ["./palpitar-jogo.component.css"],
 })
 export class PalpitarJogoComponent implements OnInit {
-  selecao1_nome : string = "teste";
-  selecao2_nome : string = "teste";
+  selecao1_nome! : string;
+  selecao2_nome! : string;
   gols_1!: number;
   gols_2!: number;
   id! : number;
@@ -37,6 +37,8 @@ export class PalpitarJogoComponent implements OnInit {
               this.id = id;
               this.selecao1_id = jogo.selecaoAId;
               this.selecao2_id = jogo.selecaoBId;
+              this.selecao1_nome = jogo.selecaoA?.nome!;
+              this.selecao2_nome = jogo.selecaoB?.nome!;
           },
         });
         }
