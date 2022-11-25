@@ -1,0 +1,25 @@
+<mat-card class="container">
+  <mat-card-header>
+    <mat-card-title> Palpitar Jogo </mat-card-title>
+  </mat-card-header>
+  <mat-card-content> 
+    <mat-form-field class="input" id="cpf">
+      <mat-label for="cpf">Seleção 1</mat-label>
+      <input matInput type="text" name="cpf" [(ngModel)]="selecao1" />
+    </mat-form-field>
+
+    <mat-form-field class="input" id="cpf">
+      <mat-label for="cpf">Gols</mat-label>
+      <input matInput type="number" name="cpf" [(ngModel)]="gols_1" />
+    </mat-form-field>
+    <mat-form-field class="input" id="email">
+      <mat-label for="email">Seleção 2</mat-label>
+      <input matInput type="email" name="email" [(ngModel)]="selecao2" />
+    </mat-form-field>
+
+    <mat-form-field class="input" id="cpf">
+      <mat-label for="cpf">Gols</mat-label>
+      <input matInput type="number" name="cpf" [(ngModel)]="gols_2" />
+    </mat-form-field>
+  </mat-card-content>
+</mat-card>
